@@ -6,12 +6,12 @@ body{
     display: flex;
     border: black solid 1px;
     font-family: 'Overpass', sans-serif;
+    opacity: 0.90;
 }
 .block1{
     width:45%;
     background-color: rgb(232 233 227);
     display: flex;
-
 }
 .name{
     font-size: 12px;
@@ -47,43 +47,32 @@ body{
     background-color: black;
     display: flex;
     flex-direction: column;
-
 }
 .block3-a{
     height: 335px;
 }
 .block3-b{
-    border-top: 1px solid rgb(232 233 227);
     height: 30px;
-    display: flex;
-    align-items: flex-end;
 }
 .block3-c{
-    border-top: 1px solid rgb(232 233 227);
     height: 30px;
-    display: flex;
-    align-items: flex-end;
 }
 .block3-d{
-    border-top: 1px solid rgb(232 233 227);
     height: 30px;
-    display: flex;
-    align-items: flex-end;
 }
 .block3-e{
-    border-top: 1px solid rgb(232 233 227);
     height: 80px;
+}
+.display-prop{
+    border-top: 1px solid rgb(232 233 227);
     display: flex;
     align-items: flex-end;
 }
-
 p{
-    
     color: rgb(232 233 227);
     font-size: 4px;
     padding-left: 5px;
     align-self: flex-end;
-
 }
 sub{
     color: rgb(232 233 227);
