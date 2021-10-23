@@ -1,0 +1,47 @@
+body{
+    width: 350px;
+    height: 500px;
+    display: flex;
+    border: black solid 1px;
+}
+.block1{
+    width:45%;
+    background-color: rgb(232 233 227);
+    display: flex;
+
+}
+.name{
+    font: 15px Arial;
+    white-space:nowrap;
+    align-self: flex-end;
+    padding-bottom: 150px;
+}
+.block2{
+    width:25%;
+    display: flex;
+    flex-direction: column;
+}
+.block2-a{
+    height: 17%;
+    background-color: rgb(11 89 163);
+}
+.block2-b{
+    height: 17%;
+    background-color: rgb(250 187 30);
+}
+.block2-c{
+    height: 17%;
+    background-color: rgb(129 0 5);
+}
+.block2-d{
+    height: 49%;
+    background-color: rgb(232 233 227);
+}
+.block3{
+    width:30%;
+    background-color: black;
+}
+p{
+    color: white;
+    font-size: 6px;
+}
