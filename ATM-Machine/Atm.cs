@@ -26,7 +26,8 @@ namespace ATM_Machine
         {
             if (withdrawlRequest > Fund)
             {
-                throw new Exception("ATM_ERR");
+                Console.WriteLine("ATM_ERR");
+                return false;
             }
             else
             {

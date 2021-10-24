@@ -9,8 +9,6 @@ namespace ATM_Machine
 {
     class Program
     {
-       // private static object account;
-
         static void Main(string[] args)
         {
             
@@ -53,7 +51,11 @@ namespace ATM_Machine
                                     break;
                                 case "W":
                                     nextRow++;
-                                    account.MakeWithdrawl(Int32.Parse(action[1]));
+                                    if (atm.CheckForSufficentFunds(Int32.Parse(action[1])))
+                                    {
+                                        atm.WithdrawFunds(Int32.Parse(action[1]));
+                                        account.MakeWithdrawl(Int32.Parse(action[1]));
+                                    }
                                     break;
                             }
                         }
@@ -64,7 +66,8 @@ namespace ATM_Machine
                         Console.WriteLine(e);
                     }
                 }             
-            }          
+            }
+            Console.WriteLine(atm.Fund);
         }
     }
 }

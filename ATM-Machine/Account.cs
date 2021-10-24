@@ -6,14 +6,8 @@ using System.Threading.Tasks;
 
 namespace ATM_Machine
 {
-   /* public interface IAccount
-    {
-        bool CheckIfPinCorrect(int pin);
-        void SetBalanceAndOverdraft(int balance, int overdraft);
-        int GetBalance();
-        double MakeWithdrawl(int withdrawlAmount);
-    }*/
-    public class Account //: IAccount
+ 
+    public class Account
     {
         public int AccountNumber { get; set; }
         public int Pin { get; set; }
