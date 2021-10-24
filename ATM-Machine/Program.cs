@@ -26,7 +26,6 @@ namespace ATM_Machine
             for (var i = 0; i < transactions.Count; i++)
             {
                 transactions[i].Trim();
-                Console.WriteLine(transactions[i]);
                 if(transactions[i] == "")
                 {
                     nextLineNewAccount = true;
@@ -42,8 +41,30 @@ namespace ATM_Machine
                         nextLineNewAccount = false;
                         string[] balanceOverdraft = transactions[i+1].Split(" ");
                         account.SetBalanceAndOverdraft(Int32.Parse(balanceOverdraft[0]), Int32.Parse(balanceOverdraft[1]));
-                        i++;
-                        Console.WriteLine(account.AccountNumber + " " + account.Pin + " " + account.Balance + " " + account.Overdraft);
+                        int nextRow = i+2;
+                        while (transactions[nextRow].Trim() != "")
+                        {
+                            string[] action = transactions[nextRow].Split(" ");
+                            switch (action[0])
+                            {
+                                case "B":
+                                    nextRow++;
+                                    account.GetBalance();
+                                    break;
+                                case "W":
+                                    nextRow++;
+                                    try
+                                    {
+                                        account.MakeWithdrawl(Int32.Parse(action[1]));
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Console.WriteLine(e);
+                                    }
+                                    break;
+                            }
+                        }
+                      //  Console.WriteLine(account.AccountNumber + " " + account.Pin + " " + account.Balance + " " + account.Overdraft);
                     }
                     catch (Exception e)
                     {

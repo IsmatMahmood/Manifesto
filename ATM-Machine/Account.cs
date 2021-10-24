@@ -30,7 +30,7 @@ namespace ATM_Machine
         {
             if ( this.Pin != pin)
             {
-                throw new InvalidOperationException("ACCOUNT_ERR");
+                throw new Exception("ACCOUNT_ERR");
             }
             else
             {
@@ -46,6 +46,7 @@ namespace ATM_Machine
         
         public int GetBalance()
         {
+            Console.WriteLine(this.Balance);
             return (int)this.Balance;
         }
 
@@ -53,11 +54,12 @@ namespace ATM_Machine
         {
             if (withdrawlAmount > Balance + Overdraft)
             {
-                throw new InvalidOperationException("FUNDS_ERR");
+                throw new Exception("FUNDS_ERR");
             }
             else
             {
                 this.Balance -= withdrawlAmount;
+                Console.WriteLine(this.Balance);
                 return (int)Balance;
             }
         }

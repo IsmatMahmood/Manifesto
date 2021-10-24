@@ -26,7 +26,7 @@ namespace ATM_Machine
         {
             if (withdrawlRequest > Fund)
             {
-                throw new InvalidOperationException("ATM_ERR");
+                throw new Exception("ATM_ERR");
             }
             else
             {
