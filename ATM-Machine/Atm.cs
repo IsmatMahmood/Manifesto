@@ -8,7 +8,7 @@ namespace ATM_Machine
 {
     class Atm
     {
-        private int Fund { get; set; }
+        public int Fund { get; set; }
 
         public static Atm Parse(int fund)
         {

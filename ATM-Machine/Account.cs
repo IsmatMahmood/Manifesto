@@ -6,27 +6,29 @@ using System.Threading.Tasks;
 
 namespace ATM_Machine
 {
-    public class Account
+    public interface IAccount
     {
-        private int AccountNumber { get; set; }
-        private int Pin { get; set; }
-        private double Balance { get; set; }
-        private double Overdraft { get; set; }
+        bool CheckIfPinCorrect(int pin);
+        void SetBalanceAndOverdraft(int balance, int overdraft);
+        int GetBalance();
+        double MakeWithdrawl(int withdrawlAmount);
+    }
+    public class Account : IAccount
+    {
+        public int AccountNumber { get; set; }
+        public int Pin { get; set; }
+        public int? Balance { get; set; } = 0;
+        public int? Overdraft { get; set; } = 0;
         
-        public static Account Parse( int accountNo, int pin, double balance, double overdraft)
+        public Account (int accountNo, int pin)
         {
-            var account = new Account();
-            account.AccountNumber = accountNo;
-            account.Pin = pin;
-            account.Balance = balance;
-            account.Overdraft = overdraft;
-
-            return account;
+            this.AccountNumber = accountNo;
+            this.Pin = pin;
         }
 
         public bool CheckIfPinCorrect (int pin)
         {
-            if ( Pin != pin)
+            if ( this.Pin != pin)
             {
                 throw new InvalidOperationException("ACCOUNT_ERR");
             }
@@ -35,10 +37,16 @@ namespace ATM_Machine
                 return true;
             }   
         }
-        
-        public double GetBalance()
+
+        public void SetBalanceAndOverdraft(int balance, int overdraft)
         {
-            return Balance;
+            this.Balance = balance;
+            this.Overdraft = overdraft;
+        }
+        
+        public int GetBalance()
+        {
+            return (int)this.Balance;
         }
 
         public double MakeWithdrawl(int withdrawlAmount)
@@ -49,8 +57,8 @@ namespace ATM_Machine
             }
             else
             {
-                Balance -= withdrawlAmount;
-                return Balance;
+                this.Balance -= withdrawlAmount;
+                return (int)Balance;
             }
         }
     }
