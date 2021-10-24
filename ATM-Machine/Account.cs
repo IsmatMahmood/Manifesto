@@ -8,28 +8,31 @@ namespace ATM_Machine
 {
     public class Account
     {
-        int AccountNumber { get; set; }
-        int Pin { get; set; }
-        double Balance { get; set; }
-        double Overdraft { get; set; }
+        private int AccountNumber { get; set; }
+        private int Pin { get; set; }
+        private double Balance { get; set; }
+        private double Overdraft { get; set; }
         
-        public Account( int accountNo, int pin, double balance, double overdraft)
+        public static Account Parse( int accountNo, int pin, double balance, double overdraft)
         {
-            AccountNumber = accountNo;
-            Pin = pin;
-            Balance = balance;
-            Overdraft = overdraft;
+            var account = new Account();
+            account.AccountNumber = accountNo;
+            account.Pin = pin;
+            account.Balance = balance;
+            account.Overdraft = overdraft;
+
+            return account;
         }
 
         public bool CheckIfPinCorrect (int pin)
         {
-            if ( Pin == pin)
+            if ( Pin != pin)
             {
-                return true;
+                throw new InvalidOperationException("ACCOUNT_ERR");
             }
             else
             {
-                return false;
+                return true;
             }   
         }
         
@@ -42,7 +45,7 @@ namespace ATM_Machine
         {
             if (withdrawlAmount > Balance + Overdraft)
             {
-                throw new InvalidOperationException("You do not have sufficient funds for this withdrawl amount!");
+                throw new InvalidOperationException("FUNDS_ERR");
             }
             else
             {
