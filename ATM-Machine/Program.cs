@@ -9,7 +9,7 @@ namespace ATM_Machine
 {
     class Program
     {
-        private static object account;
+       // private static object account;
 
         static void Main(string[] args)
         {
@@ -53,27 +53,18 @@ namespace ATM_Machine
                                     break;
                                 case "W":
                                     nextRow++;
-                                    try
-                                    {
-                                        account.MakeWithdrawl(Int32.Parse(action[1]));
-                                    }
-                                    catch (Exception e)
-                                    {
-                                        Console.WriteLine(e);
-                                    }
+                                    account.MakeWithdrawl(Int32.Parse(action[1]));
                                     break;
                             }
                         }
-                      //  Console.WriteLine(account.AccountNumber + " " + account.Pin + " " + account.Balance + " " + account.Overdraft);
+                        i = nextRow;
                     }
                     catch (Exception e)
                     {
                         Console.WriteLine(e);
                     }
                 }             
-            }
-            Console.WriteLine(atm.Fund);
-           
+            }          
         }
     }
 }

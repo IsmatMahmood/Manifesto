@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace ATM_Machine
 {
-    public interface IAccount
+   /* public interface IAccount
     {
         bool CheckIfPinCorrect(int pin);
         void SetBalanceAndOverdraft(int balance, int overdraft);
         int GetBalance();
         double MakeWithdrawl(int withdrawlAmount);
-    }
-    public class Account : IAccount
+    }*/
+    public class Account //: IAccount
     {
         public int AccountNumber { get; set; }
         public int Pin { get; set; }
@@ -30,7 +30,8 @@ namespace ATM_Machine
         {
             if ( this.Pin != pin)
             {
-                throw new Exception("ACCOUNT_ERR");
+                Console.WriteLine("ACCOUNT_ERR");
+                return false;
             }
             else
             {
@@ -44,23 +45,21 @@ namespace ATM_Machine
             this.Overdraft = overdraft;
         }
         
-        public int GetBalance()
+        public void GetBalance()
         {
             Console.WriteLine(this.Balance);
-            return (int)this.Balance;
         }
 
-        public double MakeWithdrawl(int withdrawlAmount)
+        public void MakeWithdrawl(int withdrawlAmount)
         {
             if (withdrawlAmount > Balance + Overdraft)
             {
-                throw new Exception("FUNDS_ERR");
+                Console.WriteLine("FUNDS_ERR");
             }
             else
             {
                 this.Balance -= withdrawlAmount;
                 Console.WriteLine(this.Balance);
-                return (int)Balance;
             }
         }
     }
