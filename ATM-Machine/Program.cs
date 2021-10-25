@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using static System.Net.Mime.MediaTypeNames;
+
 
 namespace ATM_Machine
 {
@@ -13,61 +12,57 @@ namespace ATM_Machine
         {
             
             string filepath = @"C:\Users\ismat\Documents\Code\Manifesto\ATM-Machine\TestData.txt";
-            //string filepath2 = System.AppDomain.CurrentDomain.BaseDirectory;
             List<string> lines = File.ReadAllLines(filepath).ToList();
             var atm = Atm.Parse(Int32.Parse(lines[0]));
             lines.RemoveAt(0);
             List<string> transactions = lines;
             bool nextLineNewAccount = false;
+            int row = 0;
 
-            
-            for (var i = 0; i < transactions.Count; i++)
+            while ( row < transactions.Count)
             {
-                transactions[i].Trim();
-                if(transactions[i] == "")
+                transactions[row].Trim();
+                if (transactions[row] == "")
                 {
                     nextLineNewAccount = true;
+                    row++;
                     continue;
-                }     
-                string[] transaction = transactions[i].Split(" ");
-                if (nextLineNewAccount)
+                }
+                else
                 {
-                    var account = new Account(Int32.Parse(transaction[0]), Int32.Parse(transaction[1]));
-                    try
+                    string[] transaction = transactions[row].Split(" ");
+                    if (nextLineNewAccount)
                     {
-                        account.CheckIfPinCorrect(Int32.Parse(transaction[2]));
-                        nextLineNewAccount = false;
-                        string[] balanceOverdraft = transactions[i+1].Split(" ");
-                        account.SetBalanceAndOverdraft(Int32.Parse(balanceOverdraft[0]), Int32.Parse(balanceOverdraft[1]));
-                        int nextRow = i+2;
-                        while (transactions[nextRow].Trim() != "")
+                        var account = new Account(Int32.Parse(transaction[0]), Int32.Parse(transaction[1]));
+                        if (account.CheckIfPinCorrect(Int32.Parse(transaction[2])))
                         {
-                            string[] action = transactions[nextRow].Split(" ");
-                            switch (action[0])
+                            nextLineNewAccount = false;
+                            string[] balanceOverdraft = transactions[row + 1].Split(" ");
+                            account.SetBalanceAndOverdraft(Int32.Parse(balanceOverdraft[0]), Int32.Parse(balanceOverdraft[1]));
+                            row += 2;
+                            while (row < transactions.Count && transactions[row].Trim() != "")
                             {
-                                case "B":
-                                    nextRow++;
-                                    account.GetBalance();
-                                    break;
-                                case "W":
-                                    nextRow++;
-                                    if (atm.CheckForSufficentFunds(Int32.Parse(action[1])))
-                                    {
-                                        atm.WithdrawFunds(Int32.Parse(action[1]));
-                                        account.MakeWithdrawl(Int32.Parse(action[1]));
-                                    }
-                                    break;
+                                string[] action = transactions[row].Split(" ");
+                                switch (action[0])
+                                {
+                                    case "B":
+                                        row++;
+                                        account.GetBalance();
+                                        break;
+                                    case "W":
+                                        row++;
+                                        if (atm.CheckForSufficentFunds(Int32.Parse(action[1])))
+                                        {
+                                            atm.WithdrawFunds(Int32.Parse(action[1]));
+                                            account.MakeWithdrawl(Int32.Parse(action[1]));
+                                        }
+                                        break;
+                                }
                             }
                         }
-                        i = nextRow;
                     }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                    }
-                }             
+                }
             }
-            Console.WriteLine(atm.Fund);
         }
     }
 }
