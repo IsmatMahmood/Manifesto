@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace ATM_Machine
 {
-    class Atm
+    public interface IAtm
+    {
+        bool CheckForSufficentFunds(int withdrawlRequest);
+        void WithdrawFunds(int withdrawlRequest);
+    }
+
+    public class Atm : IAtm
     {
         public int Fund { get; set; }
 
