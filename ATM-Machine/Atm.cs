@@ -8,6 +8,8 @@ namespace ATM_Machine
 {
     public interface IAtm
     {
+        int Fund { get; set; }
+
         bool CheckForSufficentFunds(int withdrawlRequest);
         void WithdrawFunds(int withdrawlRequest);
     }

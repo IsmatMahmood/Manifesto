@@ -8,6 +8,11 @@ namespace ATM_Machine
 {
     public interface IAccount
     {
+        int AccountNumber { get; set; }
+        int Pin { get; set; }
+        int Balance { get; set; }
+        int Overdraft { get; set; }
+
         bool CheckIfPinCorrect(int pin);
         void SetBalanceAndOverdraft(int balance, int overdraft);
         void GetBalance();
@@ -18,8 +23,8 @@ namespace ATM_Machine
     {
         public int AccountNumber { get; set; }
         public int Pin { get; set; }
-        public int? Balance { get; set; } = 0;
-        public int? Overdraft { get; set; } = 0;
+        public int Balance { get; set; } = 0;
+        public int Overdraft { get; set; } = 0;
         
         public Account (int accountNo, int pin)
         {
