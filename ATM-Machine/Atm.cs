@@ -18,12 +18,9 @@ namespace ATM_Machine
     {
         public int Fund { get; set; }
 
-        public static Atm Parse(int fund)
+        public Atm (int fund)
         {
-            var atm = new Atm();
-            atm.Fund = fund;
-
-            return atm;
+            this.Fund = fund;
         }
             public void SetFunds(int amount)
         {

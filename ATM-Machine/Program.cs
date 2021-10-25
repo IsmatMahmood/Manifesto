@@ -13,7 +13,7 @@ namespace ATM_Machine
             
             string filepath = @"C:\Users\ismat\Documents\Code\Manifesto\ATM-Machine\TestData.txt";
             List<string> lines = File.ReadAllLines(filepath).ToList();
-            var atm = Atm.Parse(Int32.Parse(lines[0]));
+            var atm = new Atm(Int32.Parse(lines[0]));
             lines.RemoveAt(0);
             List<string> transactions = lines;
             bool nextLineNewAccount = false;
