@@ -22,10 +22,6 @@ namespace ATM_Machine
         {
             this.Fund = fund;
         }
-            public void SetFunds(int amount)
-        {
-            Fund = amount;
-        }
 
         public bool CheckForSufficentFunds (int withdrawlRequest)
         {
